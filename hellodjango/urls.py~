@@ -6,6 +6,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     (r'^test/$', 'Tsoha.views.index'),
+    (r'^savetest/$', 'Tsoha.views.saveTest'),
     # Examples:
     # url(r'^$', 'hellodjango.views.home', name='home'),
     # url(r'^hellodjango/', include('hellodjango.foo.urls')),

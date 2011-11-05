@@ -1,0 +1,28 @@
+body {
+    text-align: center
+}
+
+#nav {
+    margin-left: auto; 
+    margin-right: auto;
+    padding:0;
+    list-style:none;
+}
+
+
+ui {
+
+    display:inline
+}
+
+li {
+    display:inline;
+}
+
+li > a {
+    text-decoration:none;
+    padding:5px 0;
+
+    color:#000000;
+
+}

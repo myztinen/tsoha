@@ -4,4 +4,3 @@ include
 lib
 .Python
 *.pyc
-*py~
