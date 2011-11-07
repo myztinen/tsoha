@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Tsohasaitti</title>
-		<link rel='stylesheet'  href='style.css' type='text/css'/>
+		<link rel='stylesheet'  href='templates/style.css' type='text/css'/>
 	</head>
 	<body>
 		<div id="header"><h1>Drinkkiarkisto</h1></div>
@@ -15,10 +15,10 @@
 		</div>
 		<div id="content">
 			<div id="primary">
-		
+		        <p>Nam vitae risus orci, vitae malesuada est. Morbi laoreet sodales viverra. Ut et libero id nulla volutpat tempus at in justo. Fusce quis mi magna. Sed faucibus quam vel lorem posuere in ultrices enim semper. Praesent semper ligula sed urna feugiat interdum. Pellentesque at magna risus. Duis tempus mollis sapien, nec fringilla leo tincidunt sed. Praesent consequat tortor sed elit molestie lacinia. Praesent quis nisi magna. Aenean nec purus ac diam ultrices dignissim id cursus diam. Quisque sagittis nisl sit amet tellus accumsan accumsan. Maecenas eleifend euismod auctor. Vivamus ligula leo, mattis a aliquam eu, interdum vitae diam. Morbi pulvinar, lectus at gravida cursus, arcu mi tempor neque, eget rhoncus nisi urna eu magna. In vestibulum sem id odio sagittis eu ultricies eros vehicula. </p>
 			</div>
 			<div id="secondary">
-				<h3>Recent Entries:</h3>
+
 			<div>
 		</div>
 	</body>

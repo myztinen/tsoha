@@ -16,10 +16,10 @@
 		<div id="content">
 			<div id="primary">
                 <h3>Hae drinkkiohjeita</h3>
-                <form action="/hae" method="get">
-                     <p><label>Hakusana: <input></label></p>
+                <form action="/savetest/" method="post">{% csrf_token %}
+                     <p><label>Hakusana: <input name="parameter"></label></p>
                      <p><label>Mink&auml; perusteella haetaan
-                        <select>
+                        <select name="target">
                             <option value="aines">Aines</option>
                             <option value="nimi">Nimi</option>
                         </select></label></p>
