@@ -8,6 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
     (r'^$', 'Tsoha.views.index'),
+    (r'^hae$', 'Tsoha.views.search'),
     (r'^savetest/$', 'Tsoha.views.save_test'),
     # Examples:
     # url(r'^$', 'hellodjango.views.home', name='home'),

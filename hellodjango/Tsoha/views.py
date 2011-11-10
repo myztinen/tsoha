@@ -1,10 +1,13 @@
-from Tsoha.models import Drink
+from Tsoha.models import Drink, Drink_name
 from Tsoha.forms import SearchForm
 from django.http import HttpResponse
 from django.shortcuts import render
 
 def index(request):
     return render(request,'index.html')
+    
+def search(request):
+    return render(request,'hae.html')
     
 def contact(request):
     if request.method == 'POST': # If the form has been submitted...
@@ -28,6 +31,10 @@ def save_test(request):
             message = form.cleaned_data['target']
             print subject
             print message
+            lol = Drink(drink_type="testijuoma")
+            lol.save()
+            lal = Drink_name(name="ukulele", drink=lol)
+            lal.save()
             return HttpResponse("Posting was succeess") # Redirect after POST
     else:
         form = ContactForm() # An unbound form
