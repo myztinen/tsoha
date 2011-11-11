@@ -173,5 +173,177 @@
     "fields": {
       "name": "Soodavesi"
     }
+  },
+    {
+    "model": "Tsoha.Drink_type",
+    "pk": 26,
+    "fields": {
+      "type_name": "Cocktail"
+    }
+  },
+    {
+    "model": "Tsoha.Drink_type",
+    "pk": 27,
+    "fields": {
+      "type_name": "Apertiivi"
+    }
+  },
+    {
+    "model": "Tsoha.Drink_type",
+    "pk": 28,
+    "fields": {
+      "type_name": "Shotti"
+    }
+  },
+    {
+    "model": "Tsoha.Drink_type",
+    "pk": 29,
+    "fields": {
+      "type_name": "Jälkiruokajuoma"
+    }
+  },
+    {
+    "model": "Tsoha.Drink",
+    "pk": 30,
+    "fields": {
+      "drink_type": "26",
+      "recipe": "Sekoita aineset parhaiten osaamalla tavalla"
+    }
+  },
+    {
+    "model": "Tsoha.Drink",
+    "pk": 31,
+    "fields": {
+      "drink_type": "26",
+      "recipe": "Sekoita ainekset"
+    }
+  },
+    {
+    "model": "Tsoha.Drink",
+    "pk": 32,
+    "fields": {
+      "drink_type": "28",
+      "recipe": "Juodaan kylmänä"
+    }
+  },
+    {
+    "model": "Tsoha.Drink",
+    "pk": 33,
+    "fields": {
+      "drink_type": "29",
+      "recipe": ": Valmistetaan sekoittamalla kahvi , fariinisokeri ja viski keskenään ja valutetaan kevyesti vatkattu kerma lusikan avulla sekoituksen päälle. "
+    }
+  },
+    {
+    "model": "Tsoha.Drink_name",
+    "pk": 34,
+    "fields": {
+      "name": "Opiskelijan erikoinen",
+      "drink":"30"
+    }
+  },
+      {
+    "model": "Tsoha.Drink_name",
+    "pk": 35,
+    "fields": {
+      "name": "Kovaa kokista",
+      "drink":"30"
+    }
+  },
+      {
+    "model": "Tsoha.Drink_name",
+    "pk": 36,
+    "fields": {
+      "name": "Ruuvimeisseli",
+      "drink":"31"
+    }
+  },
+      {
+    "model": "Tsoha.Drink_name",
+    "pk": 37,
+    "fields": {
+      "name": "VodkaShotti",
+      "drink":"32"
+    }
+  },
+      {
+    "model": "Tsoha.Drink_name",
+    "pk": 38,
+    "fields": {
+      "name": "Irish coffee",
+      "drink":"33"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 39,
+    "fields": {
+      "drink":"30",
+      "amount":"0,5 dl",
+      "ingredient": "6"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 40,
+    "fields": {
+      "drink":"30",
+      "amount":"5 dl",
+      "ingredient": "21"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 41,
+    "fields": {
+      "drink":"31",
+      "amount":"0,5 dl",
+      "ingredient": "1"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 42,
+    "fields": {
+      "drink":"31",
+      "amount":"1,5 dl",
+      "ingredient": "18"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 43,
+    "fields": {
+      "drink":"32",
+      "amount":"4 cl",
+      "ingredient": "1"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 44,
+    "fields": {
+      "drink":"33",
+      "amount":"1,5 cl",
+      "ingredient": "12"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 45,
+    "fields": {
+      "drink":"33",
+      "amount":"1,5 cl",
+      "ingredient": "14"
+    }
+  },
+      {
+    "model": "Tsoha.Ingredient_Amount",
+    "pk": 46,
+    "fields": {
+      "drink":"33",
+      "amount":"1,5 cl",
+      "ingredient": "19"
+    }
   }
 ]
