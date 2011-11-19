@@ -8,8 +8,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
     (r'^$', 'Tsoha.views.index'),
-    (r'^hae$', 'Tsoha.views.search'),
-    (r'^savetest/$', 'Tsoha.views.save_test'),
+    (r'^search/', 'Tsoha.views.open_searchpage'),
+    (r'^add$', 'Tsoha.views.index'),
+    (r'^searchtest/$', 'Tsoha.views.search_test'),
     # Examples:
     # url(r'^$', 'hellodjango.views.home', name='home'),
     # url(r'^hellodjango/', include('hellodjango.foo.urls')),

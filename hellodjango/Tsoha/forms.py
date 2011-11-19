@@ -1,6 +1,6 @@
 from django import forms
 
 class SearchForm(forms.Form):
-    parameter = forms.CharField(max_length=30)
-    target = forms.CharField()
+    search_parameter = forms.CharField(max_length=30)
+    search_target = forms.CharField()
 

@@ -15,19 +15,9 @@
 		</div>
 		<div id="content">
 			<div id="primary">
-                {% if drink %}
-                       {% for drink_name in drink_names %}
-                           <li><p>{{ drink_name.name }}</></li>
-                       {% endfor %}
-                       <p>{{drink.recipe}}</p>
-                    <p>{{ drink.drink_type }}</p>
-                       {% for amount in amounts %}
-                           <li><p>{{ amount.ingredient.name }} {{ amount.amount }}</p></li>
-                       {% endfor %}
-
-                {% else %}
-                    <p>Juoman ohjetta ei saatu ladattua!!!</p>
-                {% endif %}
+		        <p>{% for comment in task.comment_set.all %}
+                    {{ comment }}
+                   {% endfor %} </p>
 			</div>
 			<div id="secondary">
 

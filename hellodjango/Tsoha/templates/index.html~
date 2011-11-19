@@ -2,20 +2,31 @@
 <html lang="en">
 	<head>
 		<title>Tsohasaitti</title>
-		<link rel='stylesheet'  href='templates/style.css' type='text/css'/>
+		<link rel='stylesheet'  href='{{ STATIC_URL }}style.css' type='text/css'/>
 	</head>
 	<body>
 		<div id="header"><h1>Drinkkiarkisto</h1></div>
 		<div id="nav">
 			<ul>
 				<li><a href="/">P&auml;&auml;sivu<a></li>
-				<li><a href="/hae">Hae ohjeita</a></li>
-				<li><a href="/lisaa">Lis&auml;&auml; ohjeita</a></li>
+				<li><a href="/search">Hae ohjeita</a></li>
+				<li><a href="/add">Lis&auml;&auml; ohjeita</a></li>
 			</ul>
 		</div>
 		<div id="content">
 			<div id="primary">
-		        <p>Nam vitae risus orci, vitae malesuada est. Morbi laoreet sodales viverra. Ut et libero id nulla volutpat tempus at in justo. Fusce quis mi magna. Sed faucibus quam vel lorem posuere in ultrices enim semper. Praesent semper ligula sed urna feugiat interdum. Pellentesque at magna risus. Duis tempus mollis sapien, nec fringilla leo tincidunt sed. Praesent consequat tortor sed elit molestie lacinia. Praesent quis nisi magna. Aenean nec purus ac diam ultrices dignissim id cursus diam. Quisque sagittis nisl sit amet tellus accumsan accumsan. Maecenas eleifend euismod auctor. Vivamus ligula leo, mattis a aliquam eu, interdum vitae diam. Morbi pulvinar, lectus at gravida cursus, arcu mi tempor neque, eget rhoncus nisi urna eu magna. In vestibulum sem id odio sagittis eu ultricies eros vehicula. </p>
+                {% if drink %}
+                       {% for drink_name in drink_names %}
+                           <li><p>{{ drink_name.name }}</></li>
+                       {% endfor %}
+                    <p>{{ drink.drink_type }}</p>
+                       {% for amount in amounts %}
+                           <li><p>{{ amount.ingredient.name }} {{ amount.amount }}</p></li>
+                       {% endfor %}
+
+                {% else %}
+                    <p>Juoman ohjetta ei saatu ladattua!!!</p>
+                {% endif %}
 			</div>
 			<div id="secondary">
 
