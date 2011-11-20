@@ -18,7 +18,7 @@ class Drink(models.Model):
     ingredients = models.ManyToManyField(Ingredient, through='Ingredient_Amount')
     
     def __unicode__(self):
-        return self.drink_type
+        return self.recipe
 
 class Drink_name(models.Model):
     name = models.CharField(max_length=30)

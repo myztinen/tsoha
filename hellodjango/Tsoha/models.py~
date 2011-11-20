@@ -31,4 +31,7 @@ class Ingredient_Amount(models.Model):
     drink = models.ForeignKey(Drink)
     amount = models.CharField(max_length=30)
     ingredient = models.ForeignKey(Ingredient)
+    
+    def __unicode__(self):
+        return self.amount
 # Create your models here.

@@ -16,11 +16,15 @@
 		<div id="content">
 			<div id="primary">
                 {% if drink %}
-                    <li> <p>{{ drink.name }}</p>
+                       {% for drink_name in drink_names %}
+                           <li><p>{{ drink_name.name }}</></li>
+                       {% endfor %}
+                       <p>{{drink.recipe}}</p>
                     <p>{{ drink.drink_type }}</p>
-                    {% for ingredient in ingredients. %}
-                        <li><p>{{ ingredient.name }}</></li>
-                    {% endfor %}
+                       {% for amount in amounts %}
+                           <li><p>{{ amount.ingredient.name }} {{ amount.amount }}</p></li>
+                       {% endfor %}
+
                 {% else %}
                     <p>Juoman ohjetta ei saatu ladattua!!!</p>
                 {% endif %}

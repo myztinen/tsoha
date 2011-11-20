@@ -15,22 +15,26 @@
 		</div>
 		<div id="content">
 			<div id="primary">
-                {% if drink %}
-                       {% for drink_name in drink_names %}
-                           <li><p>{{ drink_name.name }}</></li>
-                       {% endfor %}
-                       <p>{{drink.recipe}}</p>
-                    <p>{{ drink.drink_type }}</p>
-                       {% for amount in amounts %}
-                           <li><p>{{ amount.ingredient.name }} {{ amount.amount }}</p></li>
-                       {% endfor %}
-
-                {% else %}
-                    <p>Juoman ohjetta ei saatu ladattua!!!</p>
-                {% endif %}
+                <h3>Hae drinkkiohjeita</h3>
+                <form action="/search/" method="get">{% csrf_token %}
+                     <p><label>Hakusana: <input name="search_parameter"></label></p>
+                     <p><label>Mink&auml; perusteella search/haetaan
+                        <select name="search_target">
+                            <option value="ingredient">Aines</option>
+                            <option value="drink_name">Nimi</option>
+                        </select></label></p>
+                      <p><button type="submit" value="Hae">Hae</button></p>
+                </form>
 			</div>
 			<div id="secondary">
-
+                 {% if drink %}              
+                       {% for drink_name in drink %}
+                           <li><a href="/recipes/{{ drink_name.drink.id }}/">{{ drink_name.name }}</a></li>
+                           <p/>
+                       {% endfor %}
+                {% else %}
+                    <p>Ei hakutuloksia</p>
+                {% endif %}
 			<div>
 		</div>
 	</body>

@@ -8,7 +8,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('',
     (r'^$', 'Tsoha.views.index'),
-    (r'^search/', 'Tsoha.views.open_searchpage'),
+    (r'^search/', 'Tsoha.views.index'),
+    (r'^recipes/(?P<recipe_id>\d+)/$', 'Tsoha.views.open_recipepage'),
     (r'^add$', 'Tsoha.views.index'),
     (r'^searchtest/$', 'Tsoha.views.search_test'),
     # Examples:
