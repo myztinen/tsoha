@@ -10,20 +10,33 @@
 			<ul>
 				<li><a href="/">P&auml;&auml;sivu<a></li>
 				<li><a href="/hae">Hae ohjeita</a></li>
-				<li><a href="/lisaa">Lis&auml;&auml; ohjeita</a></li>
+				<li><a href="/add_recipes">Lis&auml;&auml; ohjeita</a></li>
 			</ul>
 		</div>
 		<div id="content">
 			<div id="primary">
-                <h3>Hae drinkkiohjeita</h3>
+                <h3>Lis&auml;&auml; drinkkiohjeita</h3>
                 <form action="/add/" method="post">{% csrf_token %}
-                     <p><label>Hakusana: <input name="parameter"></label></p>
-                     <p><label>Mink&auml; perusteella haetaan
-                        <select name="target">
-                            <option value="ingredient">Aines</option>
-                            <option value="drink_name">Nimi</option>
+                     <p><label>Drinkin nimi: <input name="drink_name"></label></p>
+                     <p><label>Juomalaji
+                        <select name="drink_type">
+                            <option value="26">Apertiivi</option>
+                            <option value="27">Cocktail</option>
+                            <option value="28">J&auml;lkiruokajuoma</option>
+                            <option value="29">Shotti</option>
                         </select></label></p>
-                      <p><button type="submit" value="Hae">Hae</button></p>
+                     <p><label>Eka ainesosa
+                     <select name="first_ingredient">
+                        {% if ingredients %}              
+                               {% for ingredient in ingredients %}
+                                   <option value="{{ingredient.id}}">{{ingredient.name}}</option>
+                               {% endfor %}
+                        {% else %}
+                             <option value="NULL">Ei ainesosia!!!</option>
+                        {% endif %}
+                     </select></label></p>
+                     <p><label>Ainesosan maara: <input name="amount"></label></p>
+                      <p><button type="submit" value="Lisaa">Hae</button></p>
                 </form>
 			<div id="secondary">
 

@@ -44,7 +44,17 @@ def open_recipepage(request, recipe_id):
     return HttpResponse(t.render(c))
     
 def open_addpage(request):
-    return render(request,'add_recipe.html')
+    ingredients = Ingredient.objects.all()
+    t = loader.get_template('add_recipe.html')
+    c = Context({
+        'ingredients' : ingredients,
+    })
+    return HttpResponse(t.render(c))
+    
+    
+    
+    
+    
     
 def search(request):
     if request.method == 'POST': 
