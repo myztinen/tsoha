@@ -27,6 +27,7 @@
                         </select></label></p>
                      <p><label>Eka ainesosa
                      <select name="first_ingredient">
+                                   <option value="NULL"></option>
                         {% if ingredients %}              
                                {% for ingredient in ingredients %}
                                    <option value="{{ingredient.id}}">{{ingredient.name}}</option>
@@ -34,9 +35,45 @@
                         {% else %}
                              <option value="NULL">Ei ainesosia!!!</option>
                         {% endif %}
-                     </select></label></p>
-                     <p><label>Ainesosan maara: <input name="amount"></label></p>
-                      <p><button type="submit" value="Lisaa">Hae</button></p>
+                     </select></label>
+                     <label>M&auml;&auml;r&auml;: <input name="first_amount"></label></p>
+                     <p><label>Toka ainesosa
+                     <select name="second_ingredient">
+                                   <option value="NULL"></option>
+                        {% if ingredients %}              
+                               {% for ingredient in ingredients %}
+                                   <option value="{{ingredient.id}}">{{ingredient.name}}</option>
+                               {% endfor %}
+                        {% else %}
+                             <option value="NULL">Ei ainesosia!!!</option>
+                        {% endif %}
+                     </select></label>
+                     <label>M&auml;&auml;r&auml;: <input name="second_amount"></label></p>
+                     <p><label>Kolmas ainesosa
+                     <select name="third_ingredient">
+                                   <option value="NULL"></option>
+                        {% if ingredients %}              
+                               {% for ingredient in ingredients %}
+                                   <option value="{{ingredient.id}}">{{ingredient.name}}</option>
+                               {% endfor %}
+                        {% else %}
+                             <option value="NULL">Ei ainesosia!!!</option>
+                        {% endif %}
+                     </select></label>
+                     <label>M&auml;&auml;r&auml;: <input name="third_amount"></label></p>
+                     <p><label>Nelj&auml;s ainesosa
+                     <select name="fourth_ingredient">
+                                   <option value="NULL"></option>
+                        {% if ingredients %}              
+                               {% for ingredient in ingredients %}
+                                   <option value="{{ingredient.id}}">{{ingredient.name}}</option>
+                               {% endfor %}
+                        {% else %}
+                             <option value="NULL">Ei ainesosia!!!</option>
+                        {% endif %}
+                     </select></label>
+                     <label>M&auml;&auml;r&auml;: <input name="fourth_amount"></label></p>                      
+                      <p><button type="submit" value="Lisaa">Lis&auml;&auml;</button></p>
                 </form>
 			<div id="secondary">
 

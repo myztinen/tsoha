@@ -34,4 +34,4 @@ class Ingredient_Amount(models.Model):
     
     def __unicode__(self):
         return self.amount
-# Create your models here.
+

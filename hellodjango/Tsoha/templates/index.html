@@ -35,6 +35,9 @@
                 {% else %}
                     <p>Ei hakutuloksia</p>
                 {% endif %}
+                <h3>{% if message %}
+                            {{ message }}</h3>
+                    {% endif %}
 			<div>
 		</div>
 	</body>
