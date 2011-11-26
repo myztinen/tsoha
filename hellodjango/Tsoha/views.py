@@ -3,6 +3,7 @@ from Tsoha.models import Drink, Drink_name, Drink_type, Ingredient, Ingredient_A
 from Tsoha.forms import SearchForm, AddRecipeForm
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
 from Tsoha.validators import AddRecipeValidator
 from Tsoha.handlers import AddRecipeHandler
     
@@ -70,4 +71,38 @@ def add_recipe(request):
             'message' : 'Drinkkireseptin pakollisina tietoina on annettav juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
        })
        return HttpResponse(t.render(c)) 
+       
+       
+def open_loginpage(request):
+    t = loader.get_template('login.html')
+    c = RequestContext( request, {
+        'message' : 'Syota kayttajatunnus ja salasana',
+    })
+    return HttpResponse(t.render(c))
+    
+def log_user(request):
+    if request.method == 'POST': 
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                t = loader.get_template('index.html')
+                c = RequestContext( request, {
+                 'message' : 'Kirjatuminen onnistui!',
+                })
+                return HttpResponse(t.render(c))
+            else:
+                t = loader.get_template('login.html')
+                c = RequestContext( request, {
+                    'message' : 'Tunnus on poissa kaytosta, pyyda yllapitajaa aktivoimaan se',
+                })
+                return HttpResponse(t.render(c))
+        else:
+            t = loader.get_template('login.html')
+            c = RequestContext( request, {
+                'message' : 'Vaara kayttajatunnus tai salasana',
+            })
+            return HttpResponse(t.render(c))
 

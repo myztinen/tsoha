@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     (r'^recipes/(?P<recipe_id>\d+)/$', 'Tsoha.views.open_recipepage'),
     (r'^add/$', 'Tsoha.views.add_recipe'),
     (r'^add_recipes/$', 'Tsoha.views.open_addpage'),
+    (r'^login_page/$', 'Tsoha.views.open_loginpage'),
+    (r'^login/$', 'Tsoha.views.log_user'),
     # Examples:
     # url(r'^$', 'hellodjango.views.home', name='home'),
     # url(r'^hellodjango/', include('hellodjango.foo.urls')),
