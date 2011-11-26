@@ -3,6 +3,8 @@ from Tsoha.models import Drink, Drink_name, Drink_type, Ingredient, Ingredient_A
 from Tsoha.forms import SearchForm, AddRecipeForm
 from django.http import HttpResponse
 from django.shortcuts import render
+from Tsoha.validators import AddRecipeValidator
+from Tsoha.handlers import AddRecipeHandler
     
 def index(request):
     if request.method == 'GET': 
@@ -24,7 +26,7 @@ def index(request):
             })
             return HttpResponse(t.render(c))
         else:
-            form = SearchForm() # An unbound form
+            form = SearchForm()
 
     return render(request,'index.html')
     
@@ -49,13 +51,23 @@ def open_addpage(request):
     return HttpResponse(t.render(c))
     
 def add_recipe(request):
-        if request.method == 'POST':
-            form = AddRecipeForm(request.POST)
-            if form.is_valid():
-               print "Success!!!"
-               return render(request,'index.html')
-               
-            else:
-               print "Failure"
-               return render(request,'index.html') 
+    if AddRecipeValidator(request).isValidAddRecipeRequest():
+        form = AddRecipeForm(request.POST)
+        if form.is_valid():
+           AddRecipeHandler(form).saveRecipe()
+           t = loader.get_template('add_recipe.html')
+           c = RequestContext( request, {
+                'ingredients' : ingredients,
+                'message' : 'Drinkkireseptin talletus onnistui!',
+           })
+           return HttpResponse(t.render(c))
+           
+    else:
+       ingredients = Ingredient.objects.all()
+       t = loader.get_template('add_recipe.html')
+       c = RequestContext( request, {
+            'ingredients' : ingredients,
+            'message' : 'Drinkkireseptin pakollisina tietoina on annettav juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
+       })
+       return HttpResponse(t.render(c)) 
 

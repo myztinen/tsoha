@@ -17,7 +17,9 @@
 			<div id="primary">
                 <h3>Lis&auml;&auml; drinkkiohjeita</h3>
                 <form action="/add/" method="post">{% csrf_token %}
-                     <p><label>Drinkin nimi: <input name="drink_name"></label></p>
+                     <p><label>Drinkin nimi <input name="drink_name"></label></p>
+                     <p><label>Valmistusohje </label></p>
+                     <p><textarea rows="5" cols="100" name="drink_recipe"></textarea></p>
                      <p><label>Juomalaji
                         <select name="drink_type">
                             <option value="26">Apertiivi</option>
@@ -76,7 +78,9 @@
                       <p><button type="submit" value="Lisaa">Lis&auml;&auml;</button></p>
                 </form>
 			<div id="secondary">
-
+                     {% if message %}
+                     <h3>{{ message }}</h3>
+                    {% endif %}
 			<div>
 		</div>
 		
