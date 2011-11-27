@@ -44,12 +44,20 @@ def open_recipepage(request, recipe_id):
     return HttpResponse(t.render(c))
     
 def open_addpage(request):
-    ingredients = Ingredient.objects.all()
-    t = loader.get_template('add_recipe.html')
-    c = RequestContext( request, {
-        'ingredients' : ingredients,
-    })
-    return HttpResponse(t.render(c))
+    if request.user.is_authenticated():
+        ingredients = Ingredient.objects.all()
+        t = loader.get_template('add_recipe.html')
+        c = RequestContext( request, {
+            'ingredients' : ingredients,
+        })
+        return HttpResponse(t.render(c))
+    else:
+        t = loader.get_template('index.html')
+        c = RequestContext( request, {
+             'message' : 'Sinun taytyy kirjautua lisataksesi resepteja',
+        })
+        return HttpResponse(t.render(c))
+
     
 def add_recipe(request):
     if AddRecipeValidator(request).isValidAddRecipeRequest():
