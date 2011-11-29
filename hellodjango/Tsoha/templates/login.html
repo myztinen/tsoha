@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html>
 	<head>
 		<title>Tsohasaitti</title>
 		<link rel='stylesheet'  href='{{ STATIC_URL }}style.css' type='text/css'/>
@@ -9,9 +9,12 @@
 		<div id="nav">
 			<ul>
 				<li><a href="/">P&auml;&auml;sivu<a></li>
-				<li><a href="/search">Hae ohjeita</a></li>
 				<li><a href="/add_recipes">Lis&auml;&auml; ohjeita</a></li>
-				<li><a href="/login_page">Kirjaudu sis&auml;&auml;n</a></li>
+				{% if user.is_authenticated %}
+				    <li><a href="/logout">Kirjaudu ulos</a></li>
+				{% else %}
+                    <li><a href="/login_page">Kirjaudu sis&auml;&auml;n</a></li>
+                {% endif %}
 			</ul>
 		</div>
 		<div id="content">

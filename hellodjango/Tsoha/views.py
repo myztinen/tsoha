@@ -3,7 +3,7 @@ from Tsoha.models import Drink, Drink_name, Drink_type, Ingredient, Ingredient_A
 from Tsoha.forms import SearchForm, AddRecipeForm
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from Tsoha.validators import AddRecipeValidator
 from Tsoha.handlers import AddRecipeHandler
     
@@ -24,6 +24,7 @@ def index(request):
             t = loader.get_template('index.html')
             c = RequestContext( request, {
                 'drink':results,
+                'user' : request.user,
             })
             return HttpResponse(t.render(c))
         else:
@@ -60,25 +61,31 @@ def open_addpage(request):
 
     
 def add_recipe(request):
-    if AddRecipeValidator(request).isValidAddRecipeRequest():
-        form = AddRecipeForm(request.POST)
-        if form.is_valid():
-           AddRecipeHandler(form).saveRecipe()
+    if request.user.is_authenticated():
+        if AddRecipeValidator(request).isValidAddRecipeRequest():
+            form = AddRecipeForm(request.POST)
+            if form.is_valid():
+               AddRecipeHandler(form).saveRecipe()
+               t = loader.get_template('add_recipe.html')
+               c = RequestContext( request, {
+                    'ingredients' : ingredients,
+                    'message' : 'Drinkkireseptin talletus onnistui!',
+               })
+               return HttpResponse(t.render(c))       
+        else:
+           ingredients = Ingredient.objects.all()
            t = loader.get_template('add_recipe.html')
            c = RequestContext( request, {
                 'ingredients' : ingredients,
-                'message' : 'Drinkkireseptin talletus onnistui!',
+                'message' : 'Drinkkireseptin pakollisina tietoina on annettav juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
            })
            return HttpResponse(t.render(c))
-           
     else:
-       ingredients = Ingredient.objects.all()
-       t = loader.get_template('add_recipe.html')
-       c = RequestContext( request, {
-            'ingredients' : ingredients,
-            'message' : 'Drinkkireseptin pakollisina tietoina on annettav juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
-       })
-       return HttpResponse(t.render(c)) 
+        t = loader.get_template('index.html')
+        c = RequestContext( request, {
+             'message' : 'Sinun taytyy kirjautua lisataksesi resepteja',
+        })
+        return HttpResponse(t.render(c))
        
        
 def open_loginpage(request):
@@ -113,4 +120,12 @@ def log_user(request):
                 'message' : 'Vaara kayttajatunnus tai salasana',
             })
             return HttpResponse(t.render(c))
+
+def logout_user(request):
+    logout(request)
+    t = loader.get_template('index.html')
+    c = RequestContext( request, {
+            'message' : 'Kirjauduit onnistuneesti ulos',
+    })
+    return HttpResponse(t.render(c))
 
