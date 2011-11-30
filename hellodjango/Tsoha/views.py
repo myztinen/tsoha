@@ -62,6 +62,7 @@ def open_addpage(request):
     
 def add_recipe(request):
     if request.user.is_authenticated():
+        ingredients = Ingredient.objects.all()
         if AddRecipeValidator(request).isValidAddRecipeRequest():
             form = AddRecipeForm(request.POST)
             if form.is_valid():
@@ -73,7 +74,6 @@ def add_recipe(request):
                })
                return HttpResponse(t.render(c))       
         else:
-           ingredients = Ingredient.objects.all()
            t = loader.get_template('add_recipe.html')
            c = RequestContext( request, {
                 'ingredients' : ingredients,
