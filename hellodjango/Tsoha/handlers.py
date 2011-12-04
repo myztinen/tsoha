@@ -21,7 +21,7 @@ class AddRecipeHandler():
         
     def saveRecipe(self):
         drink_type = Drink_type.objects.get(id=self.drink_type)
-        namecount = 0
+        namecount = Drink_name.objects.filter(name__iexact=self.drink_name).count()
         print namecount
         if namecount is 0:
             initial = Drink(recipe=self.drink_recipe, drink_type=drink_type)
@@ -44,24 +44,10 @@ class AddRecipeHandler():
                 ingredient = Ingredient.objects.get(id=self.fourth_ingredient)
                 ingredient_am = Ingredient_Amount(drink=initial, amount = self.fourth_amount,  ingredient=ingredient)
                 ingredient_am.save()
+            return True
+        else:
+            return False
                 
             
-            
-
- 
-               
-
-
-             
-    """    drink_name = forms.CharField(max_length=30)
-        drink_recipe = forms.CharField(max_length=500)
-        drink_type = forms.CharField(max_length=30)
-        first_ingredient = forms.CharField(max_length=30)
-        first_amount = forms.CharField(max_length=30)
-        second_ingredient = forms.CharField(max_length=30)
-        second_amount = forms.CharField(max_length=30)
-        third_ingredient = forms.CharField(max_length=30)
-        third_amount = forms.CharField(max_length=30)
-        fourth_ingredient = forms.CharField(max_length=30)
-        fourth_amount = forms.CharField(max_length=30)"""
+  
 

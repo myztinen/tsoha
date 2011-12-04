@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.template import Context, RequestContext, loader
 from Tsoha.models import Drink, Drink_name, Drink_type, Ingredient, Ingredient_Amount
 from Tsoha.forms import SearchForm, AddRecipeForm
@@ -19,7 +20,6 @@ def index(request):
             else:
                 results = Drink_name.objects.select_related().filter(name__contains=parameter)
             
-            print results.values()
             
             t = loader.get_template('index.html')
             c = RequestContext( request, {
@@ -36,6 +36,7 @@ def open_recipepage(request, recipe_id):
     drink = Drink.objects.select_related().get(id=recipe_id)
     amounts = Ingredient_Amount.objects.filter(drink=recipe_id)
     drink_names = drink.drink_name_set.all()
+    
     t = loader.get_template('recipe.html')
     c = Context({
         'drink':drink,
@@ -55,7 +56,7 @@ def open_addpage(request):
     else:
         t = loader.get_template('index.html')
         c = RequestContext( request, {
-             'message' : 'Sinun taytyy kirjautua lisataksesi resepteja',
+             'message' : 'Sinun täytyy kirjautua lisätäksesi reseptejä',
         })
         return HttpResponse(t.render(c))
 
@@ -66,24 +67,32 @@ def add_recipe(request):
         if AddRecipeValidator(request).isValidAddRecipeRequest():
             form = AddRecipeForm(request.POST)
             if form.is_valid():
-               AddRecipeHandler(form).saveRecipe()
-               t = loader.get_template('add_recipe.html')
-               c = RequestContext( request, {
-                    'ingredients' : ingredients,
-                    'message' : 'Drinkkireseptin talletus onnistui!',
-               })
-               return HttpResponse(t.render(c))       
+               result = AddRecipeHandler(form).saveRecipe()
+               if result:
+                   t = loader.get_template('add_recipe.html')
+                   c = RequestContext( request, {
+                        'ingredients' : ingredients,
+                        'message' : 'Drinkkireseptin talletus onnistui!',
+                   })
+                   return HttpResponse(t.render(c))
+               else:
+                   t = loader.get_template('add_recipe.html')
+                   c = RequestContext( request, {
+                        'ingredients' : ingredients,
+                        'message' : 'Samanniminen resepti on jo olemassa. Reseptiä ei talletettu',
+                   })
+                   return HttpResponse(t.render(c))                      
         else:
            t = loader.get_template('add_recipe.html')
            c = RequestContext( request, {
                 'ingredients' : ingredients,
-                'message' : 'Drinkkireseptin pakollisina tietoina on annettav juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
+                'message' : 'Drinkkireseptin pakollisina tietoina on annettava juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
            })
            return HttpResponse(t.render(c))
     else:
         t = loader.get_template('index.html')
         c = RequestContext( request, {
-             'message' : 'Sinun taytyy kirjautua lisataksesi resepteja',
+             'message' : 'Sinun täytyy kirjautua lisätäksesi reseptejä',
         })
         return HttpResponse(t.render(c))
        
@@ -91,7 +100,7 @@ def add_recipe(request):
 def open_loginpage(request):
     t = loader.get_template('login.html')
     c = RequestContext( request, {
-        'message' : 'Syota kayttajatunnus ja salasana',
+        'message' : 'Syötä käyttäjätunnus ja salasana',
     })
     return HttpResponse(t.render(c))
     
@@ -105,19 +114,20 @@ def log_user(request):
                 login(request, user)
                 t = loader.get_template('index.html')
                 c = RequestContext( request, {
-                 'message' : 'Kirjatuminen onnistui!',
+                 'message' : 'Kirjautuminen onnistui!',
+                 'user' : request.user,
                 })
                 return HttpResponse(t.render(c))
             else:
                 t = loader.get_template('login.html')
                 c = RequestContext( request, {
-                    'message' : 'Tunnus on poissa kaytosta, pyyda yllapitajaa aktivoimaan se',
+                    'message' : 'Tunnus on poissa käytösta, pyydä ylläpitäjää aktivoimaan se',
                 })
                 return HttpResponse(t.render(c))
         else:
             t = loader.get_template('login.html')
             c = RequestContext( request, {
-                'message' : 'Vaara kayttajatunnus tai salasana',
+                'message' : 'Väärä käyttäjätunnus tai salasana',
             })
             return HttpResponse(t.render(c))
 

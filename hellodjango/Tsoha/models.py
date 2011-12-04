@@ -19,7 +19,7 @@ class Drink(models.Model):
     
     def __unicode__(self):
         return self.recipe
-
+    
 class Drink_name(models.Model):
     name = models.CharField(max_length=30)
     drink = models.ForeignKey(Drink)
