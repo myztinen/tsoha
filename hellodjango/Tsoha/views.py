@@ -20,7 +20,6 @@ def index(request):
             else:
                 results = Drink_name.objects.select_related().filter(name__contains=parameter)
             
-            
             t = loader.get_template('index.html')
             c = RequestContext( request, {
                 'drink':results,
@@ -36,6 +35,8 @@ def open_recipepage(request, recipe_id):
     drink = Drink.objects.select_related().get(id=recipe_id)
     amounts = Ingredient_Amount.objects.filter(drink=recipe_id)
     drink_names = drink.drink_name_set.all()
+    
+
     
     t = loader.get_template('recipe.html')
     c = Context({
@@ -66,22 +67,21 @@ def add_recipe(request):
         ingredients = Ingredient.objects.all()
         if AddRecipeValidator(request).isValidAddRecipeRequest():
             form = AddRecipeForm(request.POST)
-            if form.is_valid():
-               result = AddRecipeHandler(form).saveRecipe()
-               if result:
-                   t = loader.get_template('add_recipe.html')
-                   c = RequestContext( request, {
-                        'ingredients' : ingredients,
-                        'message' : 'Drinkkireseptin talletus onnistui!',
-                   })
-                   return HttpResponse(t.render(c))
-               else:
-                   t = loader.get_template('add_recipe.html')
-                   c = RequestContext( request, {
-                        'ingredients' : ingredients,
-                        'message' : 'Samanniminen resepti on jo olemassa. Reseptiä ei talletettu',
-                   })
-                   return HttpResponse(t.render(c))                      
+            result = AddRecipeHandler(form).saveRecipe()
+            if result:
+                t = loader.get_template('add_recipe.html')
+                c = RequestContext( request, {
+                    'ingredients' : ingredients,
+                    'message' : 'Drinkkireseptin talletus onnistui!',
+                })
+                return HttpResponse(t.render(c))
+            else:
+                t = loader.get_template('add_recipe.html')
+                c = RequestContext( request, {
+                    'ingredients' : ingredients,
+                    'message' : 'Samanniminen resepti on jo olemassa. Reseptiä ei talletettu',
+                })
+                return HttpResponse(t.render(c))                      
         else:
            t = loader.get_template('add_recipe.html')
            c = RequestContext( request, {

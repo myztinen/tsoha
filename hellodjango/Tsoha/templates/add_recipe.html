@@ -21,7 +21,7 @@
 			<div id="primary">
                 <h3>Lis&auml;&auml; drinkkiohjeita</h3>
                 <form action="/add/" method="post">{% csrf_token %}
-                     <p><label>Drinkin nimi <input name="drink_name"></label></p>
+                     <p><label>Drinkin nimi <input name="drink_name" maxlength="30"></label></p>
                      <p><label>Valmistusohje </label></p>
                      <p><textarea rows="5" cols="100" name="drink_recipe"></textarea></p>
                      <p><label>Juomalaji
@@ -42,7 +42,7 @@
                              <option value="NULL">Ei ainesosia!!!</option>
                         {% endif %}
                      </select></label>
-                     <label>M&auml;&auml;r&auml;: <input name="first_amount"></label></p>
+                     <label>M&auml;&auml;r&auml;: <input name="first_amount" maxlength="10"></label></p>
                      <p><label>Toka ainesosa
                      <select name="second_ingredient">
                                    <option value="NULL"></option>
@@ -54,7 +54,7 @@
                              <option value="NULL">Ei ainesosia!!!</option>
                         {% endif %}
                      </select></label>
-                     <label>M&auml;&auml;r&auml;: <input name="second_amount"></label></p>
+                     <label>M&auml;&auml;r&auml;: <input name="second_amount" maxlength="10"></label></p>
                      <p><label>Kolmas ainesosa
                      <select name="third_ingredient">
                                    <option value="NULL"></option>
@@ -66,7 +66,7 @@
                              <option value="NULL">Ei ainesosia!!!</option>
                         {% endif %}
                      </select></label>
-                     <label>M&auml;&auml;r&auml;: <input name="third_amount"></label></p>
+                     <label>M&auml;&auml;r&auml;: <input name="third_amount" maxlength="10"></label></p>
                      <p><label>Nelj&auml;s ainesosa
                      <select name="fourth_ingredient">
                                    <option value="NULL"></option>
@@ -78,7 +78,7 @@
                              <option value="NULL">Ei ainesosia!!!</option>
                         {% endif %}
                      </select></label>
-                     <label>M&auml;&auml;r&auml;: <input name="fourth_amount"></label></p>                      
+                     <label>M&auml;&auml;r&auml;: <input name="fourth_amount" maxlength="10"></label></p>                      
                       <p><button type="submit" value="Lisaa">Lis&auml;&auml;</button></p>
                 </form>
 			<div id="secondary">
