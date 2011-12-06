@@ -21,8 +21,26 @@ li {
 
 li > a {
     text-decoration:none;
-    padding:5px 0;
-
+    padding:15px 0px;
     color:#000000;
+}
 
+
+div#message {
+    border:solid 2px #000000;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    width: 50%;
+	margin:0px auto;
+}
+
+div#recipeView {
+    border:dotted 2px #000000;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 50%;
+	margin:0px auto;
+	background-color: #876987;
 }

@@ -20,17 +20,19 @@
 		<div id="content">
 			<div id="primary">
                 {% if drink %}
+                <div id="recipeView">
                        {% for drink_name in drink_names %}
                            <li><p>{{ drink_name.name }}</p></li>
                        {% endfor %}
                        <p>{{drink.recipe}}</p>
-                    <p>{{ drink.drink_type }}</p>
+                       <p>{{ drink.drink_type }}</p>
                        {% for amount in amounts %}
                            <li><p>{{ amount.ingredient.name }} {{ amount.amount }}</p></li>
                        {% endfor %}
 
                 {% else %}
                     <p>Juoman ohjetta ei saatu ladattua!!!</p>
+                </div>
                 {% endif %}
 			</div>
 			<div id="secondary">

@@ -21,14 +21,14 @@
 			<div id="primary">
                 <h3>Hae drinkkiohjeita</h3>
                 <form action="/login/" method="post">{% csrf_token %}
-                     <p><label>K&auml;tt&auml;j&auml;tunnus <input name="username" maxlength="10"></label></p>
+                     <p><label>K&auml;ytt&auml;j&auml;tunnus <input name="username" maxlength="10"></label></p>
                      <p><label>Salasana <input type="password" name="password" maxlength="10"></label></p>
                      <p><button type="submit" value="Kirjaudu">Kirjaudu</button></p>
                 </form>
 			</div>
 			<div id="secondary">
                 {% if message %}
-                            <h3>{{ message }}</h3>
+                            <div id="message"><h3>{{ message }}</h3></div>
                 {% endif %}
 			<div>
 		</div>
