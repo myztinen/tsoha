@@ -5,18 +5,22 @@ body {
 #nav {
     margin-left: auto; 
     margin-right: auto;
-    padding:0;
+    padding-top:0;
     list-style:none;
+    height:30px;
+    background:-moz-linear-gradient(52% 85% 90deg, #FFFFFF, #000000 100%)
 }
 
 
 ui {
 
-    display:inline
+    display:inline;
+        margin-top:2px;
 }
 
 li {
     display:inline;
+    margin:2px;
 }
 
 li > a {
@@ -25,6 +29,9 @@ li > a {
     color:#000000;
 }
 
+a:hover   {
+    color:white;
+    }
 
 div#message {
     border:solid 2px #000000;
@@ -40,6 +47,17 @@ div#recipeView {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+    width: 50%;
+	margin:0px auto;
+	background-color: #876987;
+}
+
+div#resultsView {
+    border:dotted 2px #000000;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding:10px;
     width: 50%;
 	margin:0px auto;
 	background-color: #876987;

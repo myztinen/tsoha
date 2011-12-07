@@ -22,7 +22,7 @@
                 <h3>Hae drinkkiohjeita</h3>
                 <form action="/search/" method="get">{% csrf_token %}
                      <p><label>Hakusana: <input name="search_parameter" maxlength="20"></label></p>
-                     <p><label>Mink&auml; perusteella haetaan
+                     <p><label>Mink&auml; perusteella haetaan: 
                         <select name="search_target">
                             <option value="ingredient">Aines</option>
                             <option value="drink_name">Nimi</option>
@@ -31,17 +31,21 @@
                 </form>
 			</div>
 			<div id="secondary">
-                 {% if drink %}              
-                       {% for drink_name in drink %}
-                           <li><a href="/recipes/{{ drink_name.drink.id }}/">{{ drink_name.name }}</a></li>
-                           <p/>
-                       {% endfor %}
-                {% else %}
-                    <p>Ei hakutuloksia</p>
-                {% endif %}
-                {% if message %}
-                           <div id="message"><h3>{{ message }}</h3></div>
+			    
+			    {% if message %}
+			        <div id="message"><h3>{{ message }}</h3></div>
+			    {% else %}
+			        <div id="resultsView"> 
+                     {% if drink %}             
+                           {% for drink_name in drink %}
+                               <li><a href="/recipes/{{ drink_name.drink.id }}/">{{ drink_name.name }}</a></li>
+                               <p/>
+                           {% endfor %}
+                    {% else %}
+                        <p>Ei hakutuloksia</p>
+                    </div>
                     {% endif %}
+                {% endif %}
 			<div>
 		</div>
 	</body>
