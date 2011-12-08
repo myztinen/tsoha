@@ -67,21 +67,22 @@ def add_recipe(request):
         ingredients = Ingredient.objects.all()
         if AddRecipeValidator(request).isValidAddRecipeRequest():
             form = AddRecipeForm(request.POST)
-            result = AddRecipeHandler(form).saveRecipe()
-            if result:
-                t = loader.get_template('add_recipe.html')
-                c = RequestContext( request, {
-                    'ingredients' : ingredients,
-                    'message' : 'Drinkkireseptin talletus onnistui!',
-                })
-                return HttpResponse(t.render(c))
-            else:
-                t = loader.get_template('add_recipe.html')
-                c = RequestContext( request, {
-                    'ingredients' : ingredients,
-                    'message' : 'Samanniminen resepti on jo olemassa. Reseptiä ei talletettu',
-                })
-                return HttpResponse(t.render(c))                      
+            if form.is_valid():
+                result = AddRecipeHandler(form).saveRecipe()
+                if result:
+                    t = loader.get_template('add_recipe.html')
+                    c = RequestContext( request, {
+                        'ingredients' : ingredients,
+                        'message' : 'Drinkkireseptin talletus onnistui!',
+                    })
+                    return HttpResponse(t.render(c))
+                else:
+                    t = loader.get_template('add_recipe.html')
+                    c = RequestContext( request, {
+                        'ingredients' : ingredients,
+                        'message' : 'Samanniminen resepti on jo olemassa. Reseptiä ei talletettu',
+                    })
+                    return HttpResponse(t.render(c))                      
         else:
            t = loader.get_template('add_recipe.html')
            c = RequestContext( request, {

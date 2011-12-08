@@ -32,6 +32,10 @@ li > a {
 a:hover   {
     color:white;
     }
+    
+p > label {
+    text-align:right;
+    }
 
 div#message {
     border:solid 2px #000000;
