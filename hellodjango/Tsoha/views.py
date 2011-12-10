@@ -48,10 +48,12 @@ def open_recipepage(request, recipe_id):
     
 def open_addpage(request):
     if request.user.is_authenticated():
-        ingredients = Ingredient.objects.all()
+        ingredients = Ingredient.objects.all().order_by('name')
+        drink_types = Drink_type.objects.all().order_by('type_name')
         t = loader.get_template('add_recipe.html')
         c = RequestContext( request, {
             'ingredients' : ingredients,
+            'drink_types' : drink_types,
         })
         return HttpResponse(t.render(c))
     else:
@@ -64,7 +66,8 @@ def open_addpage(request):
     
 def add_recipe(request):
     if request.user.is_authenticated():
-        ingredients = Ingredient.objects.all()
+        ingredients = Ingredient.objects.all().order_by('name')
+        drink_types = Drink_type.objects.all().order_by('type_name')
         if AddRecipeValidator(request).isValidAddRecipeRequest():
             form = AddRecipeForm(request.POST)
             if form.is_valid():
@@ -73,6 +76,7 @@ def add_recipe(request):
                     t = loader.get_template('add_recipe.html')
                     c = RequestContext( request, {
                         'ingredients' : ingredients,
+                        'drink_types' : drink_types,
                         'message' : 'Drinkkireseptin talletus onnistui!',
                     })
                     return HttpResponse(t.render(c))
@@ -80,6 +84,7 @@ def add_recipe(request):
                     t = loader.get_template('add_recipe.html')
                     c = RequestContext( request, {
                         'ingredients' : ingredients,
+                        'drink_types' : drink_types,
                         'message' : 'Samanniminen resepti on jo olemassa. Reseptiä ei talletettu',
                     })
                     return HttpResponse(t.render(c))                      
@@ -87,6 +92,7 @@ def add_recipe(request):
            t = loader.get_template('add_recipe.html')
            c = RequestContext( request, {
                 'ingredients' : ingredients,
+                'drink_types' : drink_types,
                 'message' : 'Drinkkireseptin pakollisina tietoina on annettava juoman nimi, valmistusohjeet, juomatyyppi ja ainakin yksi ainesosa ja sen annos'
            })
            return HttpResponse(t.render(c))

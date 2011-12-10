@@ -26,10 +26,14 @@
                      <p><textarea rows="5" cols="100" name="drink_recipe"></textarea></p>
                      <p><label>Juomalaji
                         <select name="drink_type">
-                            <option value="27">Apertiivi</option>
-                            <option value="26">Cocktail</option>
-                            <option value="29">J&auml;lkiruokajuoma</option>
-                            <option value="28">Shotti</option>
+                                   <option value="NULL"></option>
+                        {% if drink_types %}              
+                               {% for drink_type in drink_types %}
+                                   <option value="{{drink_type.id}}">{{drink_type.type_name}}</option>
+                               {% endfor %}
+                        {% else %}
+                             <option value="NULL">Ei juomatyyppej&auml;!!!</option>
+                        {% endif %}
                         </select></label></p>
                      <p><label>Eka ainesosa
                      <select name="first_ingredient">
