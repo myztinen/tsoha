@@ -23,6 +23,7 @@ class AddRecipeHandler():
     def saveRecipe(self):
         drink_type = Drink_type.objects.get(id=self.drink_type)
         namecount = Drink_name.objects.filter(name__iexact=self.drink_name).count()
+        print self.similarDrinkExists()
         if namecount is 0 and self.hasUniqueIngredients():
             initial = Drink(recipe=self.drink_recipe, drink_type=drink_type)
             initial.save()
@@ -56,7 +57,23 @@ class AddRecipeHandler():
             return True
         else:
             return False
-                
+            
+    def similarDrinkExists(self):
+        result = None
+        all_drinks = Drink.objects.select_related().all()
+        ingredients = filter(lambda x: x !='NULL', [self.first_ingredient, self.second_ingredient, self.third_ingredient, self.fourth_ingredient])
+        for drink in all_drinks:
+            ingredient_ids = map(unicode, Ingredient_Amount.objects.filter(drink=drink).values_list('ingredient', flat=True).order_by('id'))
+            
+            ingredients.sort()
+            ingredient_ids.sort()
+
+            if cmp(ingredient_ids, ingredients)==0:
+                result = True
+                break
+            else:
+                result =  False    
+        return result       
             
   
 
