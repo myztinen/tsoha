@@ -14,9 +14,9 @@ def index(request):
             target = form.cleaned_data['search_target']
             
             if target == "ingredient":                            
-                results = Drink_name.objects.select_related().filter(drink__ingredient_amount__ingredient__name__contains=parameter).order_by('name')
+                results = Drink_name.objects.select_related().filter(drink__ingredient_amount__ingredient__name__icontains=parameter).order_by('name')
             else:
-                results = Drink_name.objects.select_related().filter(name__contains=parameter).order_by('name')          
+                results = Drink_name.objects.select_related().filter(name__icontains=parameter).order_by('name')          
             return IndexPageRenderer(request).renderIndexPage(results)
         else:
             form = SearchForm()
